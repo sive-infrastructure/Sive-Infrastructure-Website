@@ -1,31 +1,147 @@
-const menuBtn = document.querySelector('.menu-btn');
-const navLinks = document.querySelector('.nav-links');
+const menuBtn =
+  document.querySelector(".menu-btn");
 
-menuBtn?.addEventListener('click', () => {
-  const open = navLinks.classList.toggle('open');
-  menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-});
+const navLinks =
+  document.querySelector(".nav-links");
 
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    menuBtn?.setAttribute('aria-expanded', 'false');
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+menuBtn?.addEventListener(
+  "click",
+  () => {
+
+    const open =
+      navLinks.classList.toggle("open");
+
+    menuBtn.setAttribute(
+      "aria-expanded",
+      open ? "true" : "false"
+    );
+
+  }
+);
+
+
+/* Close menu after navigation */
+
+document
+  .querySelectorAll(".nav-links a")
+  .forEach((link) => {
+
+    link.addEventListener(
+      "click",
+      () => {
+
+        navLinks.classList.remove("open");
+
+        menuBtn?.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      }
+    );
+
   });
-});
 
-document.getElementById('year').textContent = new Date().getFullYear();
 
-const revealItems = document.querySelectorAll('.platform-card, .step, .why-grid article, .cycle-item');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.animate(
-        [{opacity:0, transform:'translateY(18px)'},{opacity:1, transform:'translateY(0)'}],
-        {duration:520, easing:'cubic-bezier(.2,.7,.2,1)', fill:'both'}
-      );
-      observer.unobserve(entry.target);
+
+/* =========================================================
+   CURRENT YEAR
+   ========================================================= */
+
+const year =
+  document.getElementById("year");
+
+
+if (year) {
+
+  year.textContent =
+    new Date().getFullYear();
+
+}
+
+
+
+/* =========================================================
+   SUBTLE ENTRANCE MOTION
+   ========================================================= */
+
+const revealItems =
+  document.querySelectorAll(
+    ".platform-card, .step, .why-grid article, .cycle-item"
+  );
+
+
+if ("IntersectionObserver" in window) {
+
+  const observer =
+    new IntersectionObserver(
+
+      (entries) => {
+
+        entries.forEach(
+          (entry) => {
+
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+
+            entry.target.animate(
+
+              [
+                {
+                  opacity: 0,
+                  transform:
+                    "translateY(18px)"
+                },
+
+                {
+                  opacity: 1,
+                  transform:
+                    "translateY(0)"
+                }
+              ],
+
+              {
+                duration: 520,
+
+                easing:
+                  "cubic-bezier(.2,.7,.2,1)",
+
+                fill:
+                  "both"
+              }
+
+            );
+
+
+            observer.unobserve(
+              entry.target
+            );
+
+          }
+        );
+
+      },
+
+      {
+        threshold: 0.12
+      }
+
+    );
+
+
+  revealItems.forEach(
+    (element) => {
+
+      observer.observe(element);
+
     }
-  });
-}, {threshold:.12});
+  );
 
-revealItems.forEach(el => observer.observe(el));
+}
