@@ -5,9 +5,7 @@ const navLinks =
   document.querySelector(".nav-links");
 
 
-/* =========================================================
-   MOBILE MENU
-   ========================================================= */
+/* MOBILE MENU */
 
 menuBtn?.addEventListener(
   "click",
@@ -25,7 +23,7 @@ menuBtn?.addEventListener(
 );
 
 
-/* Close menu after navigation */
+/* CLOSE MOBILE MENU AFTER CLICK */
 
 document
   .querySelectorAll(".nav-links a")
@@ -48,14 +46,10 @@ document
   });
 
 
-
-/* =========================================================
-   CURRENT YEAR
-   ========================================================= */
+/* CURRENT YEAR */
 
 const year =
   document.getElementById("year");
-
 
 if (year) {
 
@@ -65,16 +59,12 @@ if (year) {
 }
 
 
-
-/* =========================================================
-   SUBTLE ENTRANCE MOTION
-   ========================================================= */
+/* SUBTLE REVEAL ANIMATION */
 
 const revealItems =
   document.querySelectorAll(
     ".platform-card, .step, .why-grid article, .cycle-item"
   );
-
 
 if ("IntersectionObserver" in window) {
 
@@ -90,35 +80,27 @@ if ("IntersectionObserver" in window) {
               return;
             }
 
-
             entry.target.animate(
 
               [
                 {
                   opacity: 0,
-                  transform:
-                    "translateY(18px)"
+                  transform: "translateY(18px)"
                 },
 
                 {
                   opacity: 1,
-                  transform:
-                    "translateY(0)"
+                  transform: "translateY(0)"
                 }
               ],
 
               {
                 duration: 520,
-
-                easing:
-                  "cubic-bezier(.2,.7,.2,1)",
-
-                fill:
-                  "both"
+                easing: "cubic-bezier(.2,.7,.2,1)",
+                fill: "both"
               }
 
             );
-
 
             observer.unobserve(
               entry.target
@@ -134,7 +116,6 @@ if ("IntersectionObserver" in window) {
       }
 
     );
-
 
   revealItems.forEach(
     (element) => {
